@@ -1,0 +1,92 @@
+<html>
+
+<head>
+    <title>
+        <%= title %>
+    </title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
+        integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+    <script src="https://kit.fontawesome.com/747e80ac3f.js" crossorigin="anonymous"></script>
+    <!-- <link rel="stylesheet" href="https://kit.fontawesome.com/747e80ac3f.css" crossorigin="anonymous"> -->
+
+</head>
+<style>
+
+</style>
+
+<body style="background-color: 80ff80;">
+    <!-- Container -->
+    <div class="border border-dark w-50 mx-auto p-3 mt-3" style="background-color: ccffcc;">
+        <!-- Form for taking input -->
+        <form action="/create-task" method="POST" class="sticky-top pb-4" style="background-color: ccffcc;">
+            <!-- Form heading -->
+            <h1 class="text-center">TO DO APP</h1>
+            <hr>
+            <!-- Input box for taking task -->
+            <div class="d-flex flex-column ">
+                <label>text</label>
+                <input class="form-control" type="text" name="text" class="w-100 p-2 "
+                    placeholder="What do you need to do?" required>
+            </div>
+            <hr>
+            <!-- Input box for taking category and deadline of task -->
+            <div class="d-flex justify-content-around">
+                <div class="w-50 mr-1">
+                    <label>CATEGORY</label>
+                    <select class="form-control" name="category" id="exampleFormControlSelect1" required>
+                        <option>work1</option>
+                        <option>work2</option>
+                        <option>work3</option>
+                        <option>work4</option>
+                        <option>work5</option>
+                    </select>
+                </div>
+                <div class="w-50 ">
+                    <label>DUE DATE</label>
+                    <input class="form-control" id="date" name="deadline" placeholder="MM/DD/YYY" type="date"
+                        required />
+                </div>
+            </div>
+            <hr>
+            <!-- Add task and delete task button -->
+            <div class=" d-flex justify-content-around ">
+                <button type="submit" class="btn btn-secondary btn-lg "><i class="fa-sharp fa-solid fa-cart-plus"></i>
+                    ADD
+                    TASKS</button>
+
+                <!-- Seperate formaction for delete task -->
+                <button formaction="/delete-task" type="submit" class="btn text-nowrap btn-danger btn-lg "><i
+                        class="fa-solid fa-trash"></i> DELETE
+                    TASKS</button>
+
+            </div>
+        </form>
+
+        <ul class="m-0 px-3 pt-3">
+            <% for(let i of tasks) { %>
+                <li class="row">
+                    <div class="col-1 my-auto">
+                        <input type="checkbox" <%=i.text %>/>
+                    </div>
+                    <div class="col-9 my-auto">
+                        <h4>
+                            <%= i.text %>
+                        </h4>
+                        <p>
+                            <%= i.deadline %>
+                        </p>
+                    </div>
+                    <div class="btn btn-success text-center my-auto col-2">
+                        <%= i.category %>
+                    </div>
+                </li>
+
+                <hr />
+
+                <% } %>
+        </ul>
+    </div>
+
+</body>
+
+</html>
