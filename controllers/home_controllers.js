@@ -67,6 +67,28 @@ module.exports.createTask = function(req, res){
     });
 }
 
-module.exports.deleteTask =function(req,res){
-    
+// delete task function
+module.exports.deleteTask = function(req, res){
+    const tasksToDelete = req.body.deleteTask;
+    console.log(tasksToDelete);
+    if(tasksToDelete) {
+        if (typeof(tasksToDelete)=='string') {
+            Task.findByIdAndDelete(tasksToDelete, function(err) {
+                if(err) {
+                    console.log("Delete task is not possible dur to: ", err);
+                    return;
+                }
+            })
+        } else {
+            for (let task of tasksToDelete)
+                Task.findByIdAndDelete(task, function(err) {
+                    if(err) {
+                        console.log("Delete task is not possible dur to: ", err);
+                        return;
+                    }
+                })
+        }
+    }
+
+    return res.redirect("/");
 }

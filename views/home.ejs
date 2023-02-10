@@ -11,7 +11,9 @@
 
 </head>
 <style>
-
+    input[type=checkbox]:checked + label.checkedText{
+    text-decoration: line-through;
+    }
 </style>
 
 <body style="background-color: 80ff80;">
@@ -26,14 +28,14 @@
             <div class="d-flex flex-column ">
                 <label>text</label>
                 <input class="form-control" type="text" name="text" class="w-100 p-2 "
-                    placeholder="What do you need to do?" required>
+                    placeholder="What do you need to do?">
             </div>
             <hr>
             <!-- Input box for taking category and deadline of task -->
             <div class="d-flex justify-content-around">
                 <div class="w-50 mr-1">
                     <label>CATEGORY</label>
-                    <select class="form-control" name="category" id="exampleFormControlSelect1" required>
+                    <select class="form-control" name="category" id="exampleFormControlSelect1">
                         <option>work1</option>
                         <option>work2</option>
                         <option>work3</option>
@@ -43,8 +45,7 @@
                 </div>
                 <div class="w-50 ">
                     <label>DUE DATE</label>
-                    <input class="form-control" id="date" name="deadline" placeholder="MM/DD/YYY" type="date"
-                        required />
+                    <input class="form-control" id="date" name="deadline" placeholder="MM/DD/YYY" type="date" />
                 </div>
             </div>
             <hr>
@@ -60,31 +61,34 @@
                     TASKS</button>
 
             </div>
+
+
+            <ul class="m-0 px-3 pt-3">
+                <% for(let i of tasks) { %>
+                    <li class="row">
+                        <div class="col-1 my-auto">
+                            <input type="checkbox" name="deleteTask" value="<%=i.id %>" />
+                        </div>
+                        <div class="col-9 my-auto ">
+                            <label class="checkedText">
+                                <h4>
+                                    <%= i.text %>
+                                </h4>
+                            </label>
+                            <p>
+                                <%= i.deadline %>
+                            </p>
+                        </div>
+                        <div class="btn btn-success text-center my-auto col-2">
+                            <%= i.category %>
+                        </div>
+                    </li>
+
+                    <hr />
+
+                    <% } %>
+            </ul>
         </form>
-
-        <ul class="m-0 px-3 pt-3">
-            <% for(let i of tasks) { %>
-                <li class="row">
-                    <div class="col-1 my-auto">
-                        <input type="checkbox" <%=i.text %>/>
-                    </div>
-                    <div class="col-9 my-auto">
-                        <h4>
-                            <%= i.text %>
-                        </h4>
-                        <p>
-                            <%= i.deadline %>
-                        </p>
-                    </div>
-                    <div class="btn btn-success text-center my-auto col-2">
-                        <%= i.category %>
-                    </div>
-                </li>
-
-                <hr />
-
-                <% } %>
-        </ul>
     </div>
 
 </body>
